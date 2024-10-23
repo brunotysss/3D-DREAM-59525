@@ -1,0 +1,527 @@
+[
+    {
+        "productId": 1,
+        "reviews": [
+            {
+                "user": "Juan",
+                "rating": 5,
+                "comment": "Increíble consola, el salto de calidad respecto a las anteriores es asombroso."
+            },
+            {
+                "user": "Maria",
+                "rating": 4,
+                "comment": "Muy buena, aunque el stock es muy limitado."
+            }
+        ]
+    },
+    {
+        "productId": 2,
+        "reviews": [
+            {
+                "user": "Carlos",
+                "rating": 4,
+                "comment": "La PS4 sigue siendo muy relevante, gran catálogo de juegos."
+            },
+            {
+                "user": "Ana",
+                "rating": 3,
+                "comment": "Me gusta, pero algunos juegos tienen problemas de compatibilidad."
+            }
+        ]
+    },
+    {
+        "productId": 3,
+        "reviews": [
+            {
+                "user": "Pablo",
+                "rating": 5,
+                "comment": "Una consola que se mantiene vigente, me trae muchos recuerdos."
+            },
+            {
+                "user": "Jorge",
+                "rating": 4,
+                "comment": "La PS3 sigue siendo una opción económica y divertida."
+            }
+        ]
+    },
+    {
+        "productId": 4,
+        "reviews": [
+            {
+                "user": "Lucia",
+                "rating": 5,
+                "comment": "La mejor consola retro que existe, los juegos son legendarios."
+            },
+            {
+                "user": "Roberto",
+                "rating": 4,
+                "comment": "La PS2 fue mi favorita, aunque el control se siente algo anticuado."
+            }
+        ]
+    },
+    {
+        "productId": 5,
+        "reviews": [
+            {
+                "user": "Martin",
+                "rating": 5,
+                "comment": "Una pieza de colección que no puede faltar en casa."
+            },
+            {
+                "user": "Laura",
+                "rating": 4,
+                "comment": "Gran consola, pero es difícil encontrar juegos originales."
+            }
+        ]
+    },
+    {
+        "productId": 6,
+        "reviews": [
+            {
+                "user": "Pedro",
+                "rating": 4,
+                "comment": "La Xbox original fue una gran innovación en su momento."
+            },
+            {
+                "user": "Carla",
+                "rating": 3,
+                "comment": "Me gustó, pero prefiero las nuevas generaciones de consolas."
+            }
+        ]
+    },
+    {
+        "productId": 7,
+        "reviews": [
+            {
+                "user": "Diego",
+                "rating": 5,
+                "comment": "La mejor consola para los gamers hardcore."
+            },
+            {
+                "user": "Sara",
+                "rating": 4,
+                "comment": "Muy buena, aunque algunos juegos ya no se consiguen."
+            }
+        ]
+    },
+    {
+        "productId": 8,
+        "reviews": [
+            {
+                "user": "Esteban",
+                "rating": 4,
+                "comment": "Es más que una consola, todo en uno, pero algo cara."
+            },
+            {
+                "user": "Marta",
+                "rating": 5,
+                "comment": "Perfecta para entretenimiento familiar."
+            }
+        ]
+    },
+    {
+        "productId": 9,
+        "reviews": [
+            {
+                "user": "Luis",
+                "rating": 5,
+                "comment": "Una bestia en cuanto a gráficos y rendimiento."
+            },
+            {
+                "user": "Andrea",
+                "rating": 4,
+                "comment": "Excelente, pero el precio es elevado."
+            }
+        ]
+    },
+    {
+        "productId": 10,
+        "reviews": [
+            {
+                "user": "Felipe",
+                "rating": 5,
+                "comment": "Divertidísima consola para jugar en familia."
+            },
+            {
+                "user": "Carmen",
+                "rating": 4,
+                "comment": "El control de movimiento es increíble, aunque algunos juegos son repetitivos."
+            }
+        ]
+    },
+    {
+        "productId": 11,
+        "reviews": [
+            {
+                "user": "Javier",
+                "rating": 4,
+                "comment": "La PSP me acompaña a todas partes, muy buena calidad de juegos."
+            },
+            {
+                "user": "Sofía",
+                "rating": 5,
+                "comment": "Es perfecta para jugar fuera de casa, gráficos increíbles para una consola portátil."
+            }
+        ]
+    },
+    {
+        "productId": 12,
+        "reviews": [
+            {
+                "user": "Fernando",
+                "rating": 4,
+                "comment": "La mejor consola retro, juegos clásicos que no pasan de moda."
+            },
+            {
+                "user": "Cecilia",
+                "rating": 5,
+                "comment": "Espectacular para los que aman lo retro. Mis hijos la adoran."
+            }
+        ]
+    },
+    {
+        "productId": 13,
+        "reviews": [
+            {
+                "user": "Ignacio",
+                "rating": 5,
+                "comment": "Revive todos los clásicos con este Family Game, un viaje a la infancia."
+            },
+            {
+                "user": "Mabel",
+                "rating": 4,
+                "comment": "Perfecto para los nostálgicos. Funciona muy bien."
+            }
+        ]
+    },
+    {
+        "productId": 14,
+        "reviews": [
+            {
+                "user": "Lucas",
+                "rating": 4,
+                "comment": "Muy útil para transportar archivos rápidamente, buena capacidad."
+            },
+            {
+                "user": "Clara",
+                "rating": 5,
+                "comment": "Excelente velocidad de transferencia, muy compacto."
+            }
+        ]
+    },
+    {
+        "productId": 15,
+        "reviews": [
+            {
+                "user": "Andrés",
+                "rating": 5,
+                "comment": "Las gafas son increíbles para trabajar con realidad aumentada, muy inmersivas."
+            },
+            {
+                "user": "Daniela",
+                "rating": 4,
+                "comment": "Muy buena calidad, pero un poco caras para el uso doméstico."
+            }
+        ]
+    },
+    {
+        "productId": 16,
+        "reviews": [
+            {
+                "user": "Gustavo",
+                "rating": 4,
+                "comment": "El cepillo es fantástico, siento que limpia mejor que los cepillos normales."
+            },
+            {
+                "user": "Carolina",
+                "rating": 5,
+                "comment": "La tecnología inteligente es increíble, mis dientes nunca estuvieron mejor."
+            }
+        ]
+    },
+    {
+        "productId": 17,
+        "reviews": [
+            {
+                "user": "Pablo",
+                "rating": 5,
+                "comment": "Este reloj me ayuda a llevar un mejor control de mi salud."
+            },
+            {
+                "user": "Patricia",
+                "rating": 4,
+                "comment": "Muy útil para el seguimiento de la actividad física, aunque la batería podría durar más."
+            }
+        ]
+    },
+    {
+        "productId": 18,
+        "reviews": [
+            {
+                "user": "Joaquín",
+                "rating": 5,
+                "comment": "El Theragun Mini es increíble para aliviar la tensión muscular, lo llevo a todos lados."
+            },
+            {
+                "user": "Sonia",
+                "rating": 4,
+                "comment": "Muy efectivo para el dolor muscular, aunque es un poco ruidoso."
+            }
+        ]
+    },
+    {
+        "productId": 19,
+        "reviews": [
+            {
+                "user": "Ramiro",
+                "rating": 5,
+                "comment": "La mejor experiencia de realidad virtual que he tenido en una consola."
+            },
+            {
+                "user": "Estela",
+                "rating": 4,
+                "comment": "Muy inmersivo, pero algunos juegos no están bien optimizados."
+            }
+        ]
+    },
+    {
+        "productId": 20,
+        "reviews": [
+            {
+                "user": "Matías",
+                "rating": 5,
+                "comment": "Funciona perfecto con mi Samsung, la carga es muy rápida."
+            },
+            {
+                "user": "María",
+                "rating": 4,
+                "comment": "Cargador rápido y eficiente, aunque se calienta un poco."
+            }
+        ]
+    },
+    {
+        "productId": 21,
+        "reviews": [
+            {
+                "user": "Lautaro",
+                "rating": 5,
+                "comment": "Un altavoz inteligente muy útil para controlar mi hogar con la voz."
+            },
+            {
+                "user": "Sabrina",
+                "rating": 4,
+                "comment": "Me encanta usarlo para la música y las tareas del hogar."
+            }
+        ]
+    },
+    {
+        "productId": 22,
+        "reviews": [
+            {
+                "user": "Miguel",
+                "rating": 5,
+                "comment": "La cancelación de ruido es insuperable, los mejores auriculares que he probado."
+            },
+            {
+                "user": "Daniela",
+                "rating": 4,
+                "comment": "Son excelentes, pero el precio es un poco alto."
+            }
+        ]
+    },
+    {
+        "productId": 23,
+        "reviews": [
+            {
+                "user": "Alejandro",
+                "rating": 5,
+                "comment": "La GoPro es increíble para capturar aventuras, la calidad de video es espectacular."
+            },
+            {
+                "user": "Camila",
+                "rating": 4,
+                "comment": "Buena cámara, pero la batería se agota rápido en 5K."
+            }
+        ]
+    },
+    {
+        "productId": 24,
+        "reviews": [
+            {
+                "user": "Jorge",
+                "rating": 5,
+                "comment": "Una historia increíble de Batman, el mejor cómic que he leído."
+            },
+            {
+                "user": "Elena",
+                "rating": 4,
+                "comment": "Muy oscuro, pero esencial para los fans de Batman."
+            }
+        ]
+    },
+    {
+        "productId": 25,
+        "reviews": [
+            {
+                "user": "Diego",
+                "rating": 5,
+                "comment": "Una historia única, llena de acción y emoción, de lo mejor de Spider-Man."
+            },
+            {
+                "user": "Laura",
+                "rating": 4,
+                "comment": "Me encantó la trama, aunque esperaba más sobre Peter Parker."
+            }
+        ]
+    },
+    {
+        "productId": 26,
+        "reviews": [
+            {
+                "user": "Gabriel",
+                "rating": 5,
+                "comment": "Un cómic que todo fan de superhéroes debería leer, increíble historia."
+            },
+            {
+                "user": "Luciana",
+                "rating": 4,
+                "comment": "Muy bueno, pero un poco difícil de seguir en algunos momentos."
+            }
+        ]
+    },
+    {
+        "productId": 27,
+        "reviews": [
+            {
+                "user": "Mario",
+                "rating": 5,
+                "comment": "Una historia de ciencia ficción épica, personajes entrañables."
+            },
+            {
+                "user": "Graciela",
+                "rating": 4,
+                "comment": "Gran historia, aunque esperaba más desarrollo en algunos personajes."
+            }
+        ]
+    },
+    {
+        "productId": 28,
+        "reviews": [
+            {
+                "user": "César",
+                "rating": 5,
+                "comment": "Compacto y de alta velocidad, perfecto para guardar mis documentos."
+            },
+            {
+                "user": "Melina",
+                "rating": 4,
+                "comment": "Muy bueno, aunque se siente algo frágil."
+            }
+        ]
+    },
+    {
+        "productId": 29,
+        "reviews": [
+            {
+                "user": "Javier",
+                "rating": 5,
+                "comment": "Una figura imprescindible para los fans de Star Wars."
+            },
+            {
+                "user": "Natalia",
+                "rating": 4,
+                "comment": "Muy bien detallada, aunque algo pequeña."
+            }
+        ]
+    },
+    {
+        "productId": 30,
+        "reviews": [
+            {
+                "user": "Gonzalo",
+                "rating": 5,
+                "comment": "La figura de Iron Man está muy bien detallada, una excelente adición a mi colección."
+            },
+            {
+                "user": "Paula",
+                "rating": 4,
+                "comment": "Buena calidad, pero esperaba más articulaciones en la figura."
+            }
+        ]
+    },
+    {
+        "productId": 31,
+        "reviews": [
+            {
+                "user": "Andrés",
+                "rating": 5,
+                "comment": "Gandalf nunca se vio mejor, una figura excelente para coleccionistas."
+            },
+            {
+                "user": "Vanesa",
+                "rating": 4,
+                "comment": "Muy buena calidad, pero algo costosa para el tamaño."
+            }
+        ]
+    },
+    {
+        "productId": 32,
+        "reviews": [
+            {
+                "user": "Diego",
+                "rating": 5,
+                "comment": "El trono de hierro en miniatura es increíble, muy detallado."
+            },
+            {
+                "user": "Martina",
+                "rating": 4,
+                "comment": "Me encanta, aunque podría haber sido más grande."
+            }
+        ]
+    },
+    {
+        "productId": 33,
+        "reviews": [
+            {
+                "user": "Roberto",
+                "rating": 5,
+                "comment": "Una pieza única para los fans de Harry Potter, me encanta tenerla en mi colección."
+            },
+            {
+                "user": "Silvia",
+                "rating": 4,
+                "comment": "Muy buena lámina, aunque esperaba una mejor calidad en el marco."
+            }
+        ]
+    },
+    {
+        "productId": 34,
+        "reviews": [
+            {
+                "user": "Pablo",
+                "rating": 5,
+                "comment": "Un procesador increíblemente rápido, perfecto para gaming."
+            },
+            {
+                "user": "Laura",
+                "rating": 4,
+                "comment": "Es muy potente, pero se calienta un poco si no tienes un buen sistema de refrigeración."
+            }
+        ]
+    },
+    {
+        "productId": 35,
+        "reviews": [
+            {
+                "user": "Joaquín",
+                "rating": 5,
+                "comment": "La mejor placa madre que he tenido, permite un gran overclocking."
+            },
+            {
+                "user": "Carla",
+                "rating": 4,
+                "comment": "Funciona muy bien, pero tuve problemas con los drivers al principio."
+            }
+        ]
+    }
+]
