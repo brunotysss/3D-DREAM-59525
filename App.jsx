@@ -1,11 +1,11 @@
 import { useFonts } from 'expo-font';
-import * as SplashScreen from 'splash-screen';
+import * as SplashScreen from 'expo-splash-screen';
 import { StyleSheet, Text, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import CategoriesScreen from './src/screens/CategoriesScreen';
 import ProductScreen from './src/screens/ProductScreen';
 import Header from './src/components/Header';
-import { useEffect } from 'react';
+import { useEffect  , useState } from 'react';
 
 
 
@@ -19,10 +19,11 @@ export default function App() {
   const [loaded, error] = useFonts({
 
     'Montserrat': require('./assets/fonts/Montserrat-Variable.ttf'),
-    'Rock3D': require('./assets/fonts/Rock3D-Regular-Satic.ttf'),
+    'Rock3D': require('./assets/fonts/Rock3D-Regular-Static.ttf'),
 
 
   });
+   const  [category, setCategory] = useState("")
 
   useEffect(() => {
     if (loaded || error) {
@@ -40,8 +41,14 @@ export default function App() {
   return (
     <>
     <Header/>
-    <ProductScreen/>
-     
+   
+     {
+      category
+      ?
+      <ProductScreen/>
+      :
+      <CategoriesScreen setCategory={setCategory}/>
+     }
       <StatusBar style='auto'/>
 
     </>

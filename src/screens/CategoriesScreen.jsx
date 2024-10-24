@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View , FlatList , Image} from 'react-native'
+import { StyleSheet, Text, View , FlatList , Image, Pressable} from 'react-native'
 import categories from "../data/categories.json"
 import FlatCard from '../components/FlatCard'
 
 
 
-const CategoriesScreen = () => {
+const CategoriesScreen = ({setCategory}) => {
 
 const renderCategoryItem = ({item, index}) =>{
-  console.log("index",index)
   return (
+    <Pressable onPress={()=>setCategory(item.title)}>
     <FlatCard style={
         //uso de operador ternario condicion? si es verdadero : si falso
         index%2==0 
@@ -26,6 +26,7 @@ const renderCategoryItem = ({item, index}) =>{
         />
         <Text style={styles.categoryTitle}>{item.title}</Text>
     </FlatCard>
+    </Pressable>
   )
 } 
 

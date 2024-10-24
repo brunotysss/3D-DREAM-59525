@@ -5,10 +5,19 @@ import FlatCard from '../components/FlatCard'
 import StarsRating  from '../components/StarsRating'
 import useProductRating from '../hooks/useProductRating'; // Importamos el hook para calcular el rating
 import { colors } from '../global/colors'
+import { useEffect , useState } from 'react';
 
 
+const ProductScreen = ({category}) => {
+    const [productsFiltered, setProductsFiltered] = useState([])
 
-const ProductScreen = (item) => {
+    useEffect(() =>{    
+        console.log('Valor de category:', category);
+
+        const productsTempFiltered = products.filter(product=> product.category.toLowerCase() === category.toLowerCase())
+        setProductsFiltered(productsTempFiltered)
+    },[])
+
         const renderProductItem = ({item})=>{
             const [promedioRating, totalResenas] = useProductRating(item.id); // Obtenemos el promedio de rating y cantidad de reseñas
             return(
@@ -20,25 +29,28 @@ const ProductScreen = (item) => {
                         resizeMode='contain'            
                         />
                     </View>
-                    <View style ={styles.productDescription}>
-
-                        <Text styles={styles.productTitle}>{item.title}</Text>
-                        <Text styles={styles.shortDescription}>{item.shortDescription}</Text>
-
-
-                            <View>
+                    <View style={styles.productDescription}>
+                        <Text style={styles.productTitle}>{item.title}</Text>
+                        <Text style={styles.shortDescription}>{item.shortDescription}</Text>
+                        <View style={styles.tags}>
+                            <Text style={styles.tagText}>Tags : </Text>
+                            {
+                                <FlatList
+                                    style={styles.tags}
+                                    data={item.tags}
+                                    keyExtractor={() => Math.random()}
+                                    
+                                    renderItem={({ item }) => (<Text style={styles.tagText}>{item}</Text>)}
+                                />
+                            }
+                               <View>
                                 <StarsRating rating={promedioRating}/>
                                 <Text>({totalResenas} reseñas)</Text>
 
                             </View>
-                        <View style={styles.tags}>
-                            <Text style ={styles.tagText}> Tags:</Text>
-                        <FlatList
-                            data = {item.tags}
-                            keyExtractor={()=>Math.random(Date.now())}
-                            renderItem={({item})=><Text>{item}</Text>}
-                        />
                         </View>
+                         
+                    
                         {
                             item.discount > 0 && <View style={styles.discount}><Text styles={styles.discount}>Descuento : {item.discount}</Text></View>
 
@@ -54,7 +66,7 @@ const ProductScreen = (item) => {
 
   return (
    <FlatList
-   data={products}
+   data={productsFiltered}
    keyExtractor={item=> item.id}
    renderItem={renderProductItem}
    
@@ -70,7 +82,8 @@ const styles = StyleSheet.create({
             padding: 20 ,
             justifyContent : 'flex-start',
             gap: 15,
-
+            margin: 10,
+            alignItems: "center",
         },
         productImage:{
         width : 100,
@@ -78,15 +91,19 @@ const styles = StyleSheet.create({
         
     
     },
-    productDescription:{
-        with : '75%'
+    productTitle: {
+        fontFamily: 'Montserrat',
+        fontWeight: '700',
+        fontSize: 18
+    },
+    productDescription: {
+        width: "80%",
+        padding: 20,
+        gap: 10
+        //height:100,
     },
     productInfo: {
         flex: 1,
-    },
-    productTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
     },
     price: {
         fontSize: 16,
@@ -98,13 +115,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 5,
     },
+    shortDescription: {
+
+    },
     tag: {
         flexDirection: 'row',
         gap: 5,
     },
+    
     tagText: {
         fontWeight: '600',
-        fontSize: 10,
+        fontSize: 12,
         color: colors.morado,
     },
     discount: {
@@ -118,7 +139,11 @@ const styles = StyleSheet.create({
 
     },
     noStockText: {
-        color: 'red',
+        color: 'red'
+    },
+    goBack: {
+        padding: 10,
+        color: colors.grisMedio
     }
 
 })
