@@ -1,8 +1,10 @@
+
 import { StyleSheet, Image, View ,FlatList ,Text} from 'react-native'
 import products from '../data/products.json'
 import FlatCard from '../components/FlatCard'
-import StarsRating  from '../components/StarsRating0'
+import StarsRating  from '../components/StarsRating'
 import useProductRating from '../hooks/useProductRating'; // Importamos el hook para calcular el rating
+import { colors } from '../global/colors'
 
 
 
@@ -18,26 +20,33 @@ const ProductScreen = (item) => {
                         resizeMode='contain'            
                         />
                     </View>
-                    <View>
-                        <Text>{item.title}</Text>
-                        <Text>{item.shortDescription}</Text>
+                    <View style ={styles.productDescription}>
+
+                        <Text styles={styles.productTitle}>{item.title}</Text>
+                        <Text styles={styles.shortDescription}>{item.shortDescription}</Text>
+
 
                             <View>
                                 <StarsRating rating={promedioRating}/>
                                 <Text>({totalResenas} reseñas)</Text>
 
                             </View>
-
+                        <View style={styles.tags}>
+                            <Text style ={styles.tagText}> Tags:</Text>
                         <FlatList
                             data = {item.tags}
-                            keyExtractor={()=>Math.random()}
+                            keyExtractor={()=>Math.random(Date.now())}
                             renderItem={({item})=><Text>{item}</Text>}
                         />
-
+                        </View>
                         {
-                            item.discount > 0 && <Text>Descuento : {item.discount}</Text>
+                            item.discount > 0 && <View style={styles.discount}><Text styles={styles.discount}>Descuento : {item.discount}</Text></View>
+
                         }
-                        <Text>{item.price}</Text>
+                        {
+                           item.stock<= 0 && <Text style={styles.noStockText}> Sin Stock</Text>
+                        }
+                        <Text style={styles.price}>Precio: ${item.price}</Text>
                     </View>
                 </FlatCard>
             )
@@ -90,12 +99,26 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     tag: {
-        
-        backgroundColor: '#e0e0e0',
-        borderRadius: 5,
-        paddingHorizontal: 5,
-        marginRight: 5,
-    }
+        flexDirection: 'row',
+        gap: 5,
+    },
+    tagText: {
+        fontWeight: '600',
+        fontSize: 10,
+        color: colors.morado,
+    },
+    discount: {
+        backgroundColor: colors.naranjaBrillante,
+        padding:8,
+        borderRadius: 12,
+        alignSelf : 'flex-start'
+    },
+    discountText: {
+        color: colors.blanco
 
+    },
+    noStockText: {
+        color: 'red',
+    }
 
 })

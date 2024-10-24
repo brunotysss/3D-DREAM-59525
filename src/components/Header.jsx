@@ -19,8 +19,9 @@ const styles = StyleSheet.create({
       },
       title:{
         fontSize:16,
-        fontWeight: 'bold',
-        color: colors.amarillo
+       // fontWeight: 'bold', // cuidado ver que fuente es aceptado o no en este caso el profe con bold no acepta yo debo ver mi caso
+        color: colors.amarillo,
+        fontFamily : 'Rock3D',
       }
 
 })
