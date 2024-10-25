@@ -6,7 +6,7 @@ import CategoriesScreen from './src/screens/CategoriesScreen';
 import ProductScreen from './src/screens/ProductScreen';
 import Header from './src/components/Header';
 import { useEffect  , useState } from 'react';
-
+import ProductDeatailScreen from './src/screens/ProductDeatailScreen';
 
 
 SplashScreen.preventAutoHideAsync();
@@ -24,6 +24,7 @@ export default function App() {
 
   });
    const  [category, setCategory] = useState("")
+   const  [productId, setProductId] = useState(null)
 
   useEffect(() => {
     if (loaded || error) {
@@ -40,12 +41,16 @@ export default function App() {
 
   return (
     <>
-    <Header/>
+<Header category={category} />
    
      {
+      productId
+      ?
+      <ProductDeatailScreen productId={productId}/>
+      :
       category
       ?
-      <ProductScreen/>
+      <ProductScreen category={category} setCategory={setCategory} setProductId={setProductId}/>
       :
       <CategoriesScreen setCategory={setCategory}/>
      }

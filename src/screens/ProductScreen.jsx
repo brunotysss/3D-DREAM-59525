@@ -1,26 +1,32 @@
 
-import { StyleSheet, Image, View ,FlatList ,Text} from 'react-native'
+import { StyleSheet, Image, View ,FlatList ,Text, Pressable} from 'react-native'
 import products from '../data/products.json'
 import FlatCard from '../components/FlatCard'
 import StarsRating  from '../components/StarsRating'
 import useProductRating from '../hooks/useProductRating'; // Importamos el hook para calcular el rating
 import { colors } from '../global/colors'
 import { useEffect , useState } from 'react';
-
-
-const ProductScreen = ({category}) => {
+import { Icon } from 'react-native-vector-icons/MaterialIcons';
+import Search from '../components/Search';
+const ProductScreen = ({category , setCategory , setProductId}) => {
     const [productsFiltered, setProductsFiltered] = useState([])
+    const [search, setSearch] = useState("")
 
     useEffect(() =>{    
         console.log('Valor de category:', category);
 
         const productsTempFiltered = products.filter(product=> product.category.toLowerCase() === category.toLowerCase())
         setProductsFiltered(productsTempFiltered)
-    },[])
+        if(search){
+            const productsTempSearched = productsFiltered.filter(product=>product.title.includes(search.toLowerCase()))
+            setProductsFiltered(productsTempSearched)
+        }
+    },[category, search])
 
         const renderProductItem = ({item})=>{
             const [promedioRating, totalResenas] = useProductRating(item.id); // Obtenemos el promedio de rating y cantidad de reseñas
             return(
+                <Pressable onPress={()=>setProductId(item.id)}>
                 <FlatCard style={styles.productContainer}>
                     <View>
                         <Image
@@ -52,7 +58,7 @@ const ProductScreen = ({category}) => {
                          
                     
                         {
-                            item.discount > 0 && <View style={styles.discount}><Text styles={styles.discount}>Descuento : {item.discount}</Text></View>
+                            item.discount > 0 && <View style={styles.discount}><Text styles={styles.discount}>Descuento : {item.discount} %</Text></View>
 
                         }
                         {
@@ -61,16 +67,20 @@ const ProductScreen = ({category}) => {
                         <Text style={styles.price}>Precio: ${item.price}</Text>
                     </View>
                 </FlatCard>
+                </Pressable>
             )
         }
 
   return (
+    <>
+    <Pressable onPress={()=>setCategory("")}><Icon stlye={styles.goBack} name="closearrow-back-ios" size={24} color="#900"/></Pressable>
    <FlatList
    data={productsFiltered}
    keyExtractor={item=> item.id}
    renderItem={renderProductItem}
    
    />
+   </>
   )
 }
 

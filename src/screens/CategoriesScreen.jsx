@@ -7,6 +7,8 @@ import FlatCard from '../components/FlatCard'
 const CategoriesScreen = ({setCategory}) => {
 
 const renderCategoryItem = ({item, index}) =>{
+  console.log(item.title);  // Verifica si item.title tiene el valor esperado
+
   return (
     <Pressable onPress={()=>setCategory(item.title)}>
     <FlatCard style={
