@@ -6,15 +6,15 @@ import StarsRating  from '../components/StarsRating'
 import useProductRating from '../hooks/useProductRating'; // Importamos el hook para calcular el rating
 import { colors } from '../global/colors'
 import { useEffect , useState } from 'react';
-import { Icon } from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Search from '../components/Search';
 //const ProductScreen = ({category , setCategory , setProductId}) => {
-    const ProductScreen = ({route}) => {
+    const ProductScreen = ({navigation,route}) => {
     const [productsFiltered, setProductsFiltered] = useState([])
     const [search, setSearch] = useState("")
 
     const  category  = route.params // Agrega un valor por defecto para evitar errores si no hay params
-
+  
     useEffect(() =>{    
      
         const productsTempFiltered = products.filter(product=> product.category.toLowerCase() === category.toLowerCase())
@@ -28,7 +28,7 @@ import Search from '../components/Search';
         const renderProductItem = ({item})=>{
             const [promedioRating, totalResenas] = useProductRating(item.id); // Obtenemos el promedio de rating y cantidad de reseñas
             return(
-                <Pressable onPress={()=>setProductId(item.id)}>
+            <Pressable onPress={() => navigation.navigate('Producto',   item.id )}>
                 <FlatCard style={styles.productContainer}>
                     <View>
                         <Image
@@ -75,8 +75,8 @@ import Search from '../components/Search';
 
   return (
     <>
-    <Pressable onPress={()=>setCategory("")}><Icon stlye={styles.goBack} name="closearrow-back-ios" size={24} color="#900"/></Pressable>
-   <FlatList
+                            <Pressable onPress={() => navigation.goBack()}><Icon style={styles.goBack} name="arrow-back-ios" size={24} /></Pressable>
+                            <FlatList
    data={productsFiltered}
    keyExtractor={item=> item.id}
    renderItem={renderProductItem}
@@ -133,6 +133,10 @@ const styles = StyleSheet.create({
     tag: {
         flexDirection: 'row',
         gap: 5,
+    },
+    price:{
+            fontWeight : '800',
+            fontSize: 18
     },
     
     tagText: {

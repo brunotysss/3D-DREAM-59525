@@ -1,17 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { colors } from '../global/colors'
 import MontserratText from './MontserratText'
-const Header = ({category }) => {
+const Header = ({subtitle }) => {
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.title}>3D DREAMS</Text>
-      <MontserratText style={styles.subtitle}>        
-         {
-         category ? 
-         category : 
-         'Productos'
-         }
-
+      <MontserratText style={styles.subtitle}> {subtitle}           
       </MontserratText>
       
     </View>
