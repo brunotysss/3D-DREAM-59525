@@ -1,10 +1,16 @@
 import { StyleSheet, Text, View , FlatList , Image, Pressable} from 'react-native'
-import categories from "../data/categories.json"
+//import categories from "../data/categories.json"
 import FlatCard from '../components/FlatCard'
-
+import { useSelector } from 'react-redux'
+import { colors } from '../global/colors'
 
 
 const CategoriesScreen = ({navigation}) => {
+
+
+
+const categories = useSelector(state => state.shop.value.categories)
+
 
 const renderCategoryItem = ({item, index}) =>{
   console.log(item.title);  // Verifica si item.title tiene el valor esperado

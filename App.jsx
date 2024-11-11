@@ -5,8 +5,10 @@ import { StatusBar } from 'expo-status-bar';
 
 import Header from './src/components/Header';
 import { useEffect  , useState } from 'react';
-import TabNavigator from './src/navigation/TabNavigator';
+import TabNavigator from './src/Navigation/TabNavigator';
+import { store } from './src/app/store';
 
+import { Provider} from 'react-redux'
 
 SplashScreen.preventAutoHideAsync();
 
@@ -39,12 +41,12 @@ export default function App() {
 
 
   return (
-    <>
+    <Provider store = {store}>
    
    <TabNavigator/>
       <StatusBar style='auto'/>
 
-    </>
+    </Provider>
   )
 
 }
