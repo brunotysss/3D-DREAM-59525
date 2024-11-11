@@ -35,14 +35,14 @@ const TabNavigator = () => {
             name = "Cart" 
             component={CartNavigator}
             options={{
-                tabBarIcon: ({focused})=>(<Icon name="storefront" size={32} color = {focused?colors.grisOscuro:colors.grisMedio} />)
+                tabBarIcon: ({focused})=>(<Icon name="shopping-cart" size={32} color = {focused?colors.grisOscuro:colors.grisMedio} />)
             }}
             />
             <Tab.Screen 
             name = "Receipts" 
             component={ReceipstNavigator}
             options={{
-                tabBarIcon: ({focused})=>(<Icon name="storefront" size={32} color = {focused?colors.grisOscuro:colors.grisMedio} />)
+                tabBarIcon: ({focused})=>(<Icon name="receipt-long" size={32} color = {focused?colors.grisOscuro:colors.grisMedio} />)
             }}
             />
 
