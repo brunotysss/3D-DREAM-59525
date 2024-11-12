@@ -8,22 +8,27 @@ import { colors } from '../global/colors'
 import { useEffect , useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Search from '../components/Search';
+import { useSelector } from 'react-redux';
 //const ProductScreen = ({category , setCategory , setProductId}) => {
     const ProductScreen = ({navigation,route}) => {
     const [productsFiltered, setProductsFiltered] = useState([])
     const [search, setSearch] = useState("")
 
-    const  category  = route.params // Agrega un valor por defecto para evitar errores si no hay params
-  
+    //const  category  = route.params // Agrega un valor por defecto para evitar errores si no hay params
+        //const category = useSelector(state=> state.shopReducer.value.categorySelected)
+
+    const productsFilteredByCategory = useSelector(state=>state.shopReducer.value.productsFilteredByCategory)
+
+/*
     useEffect(() =>{    
      
-        const productsTempFiltered = products.filter(product=> product.category.toLowerCase() === category.toLowerCase())
+        const productsTempFiltered = products.filter(prodruct=> product.category.toLowerCase() === category.toLowerCase())
         setProductsFiltered(productsTempFiltered)
-        if(search){
+       if(search){
             const productsTempSearched = productsFiltered.filter(product=>product.title.includes(search.toLowerCase()))
             setProductsFiltered(productsTempSearched)
         }
-    },[category, search])
+    },[category, search])*/
 
         const renderProductItem = ({item})=>{
             const [promedioRating, totalResenas] = useProductRating(item.id); // Obtenemos el promedio de rating y cantidad de reseñas
@@ -77,7 +82,7 @@ import Search from '../components/Search';
     <>
                             <Pressable onPress={() => navigation.goBack()}><Icon style={styles.goBack} name="arrow-back-ios" size={24} /></Pressable>
                             <FlatList
-   data={productsFiltered}
+   data={productsFilteredByCategory}
    keyExtractor={item=> item.id}
    renderItem={renderProductItem}
    

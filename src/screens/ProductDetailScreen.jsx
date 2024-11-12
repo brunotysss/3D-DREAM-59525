@@ -21,7 +21,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
     }, [productId] )*/
     useEffect(() => {
       const product = products.find(product => product.id === productId);
-      console.log("Producto encontrado:", product); // Verifica el resultado de la búsqueda
+    //  console.log("Producto encontrado:", product); // Verifica el resultado de la búsqueda
       setProductFound(product || {}); // Usa un objeto vacío en caso de que no se encuentre el producto
     }, [productId]);
 
@@ -42,7 +42,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
           resizeMode= 'contain'
       
       />
-            <Text style={styles.logDescription}> { productFound.longDescription}</Text>  
+            <Text style={styles.longDescription}> { productFound.longDescription}</Text>  
 
             <View style={styles.tagsContainer}>
                             <Text style={styles.tagText}>Tags : </Text>
@@ -61,7 +61,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
                          
                     
                         {
-                            productFound.discount > 0 && <View style={styles.discount}><Text styles={styles.discount}>- {productFound.discount} %</Text></View>
+                            productFound.discount > 0 && <View style={styles.discount}><Text styles={styles.discountText}>- {productFound.discount} %</Text></View>
 
                         }
                           </View>
@@ -109,8 +109,8 @@ const styles = StyleSheet.create({
              fontSize:24,
              fontWeight: '700',
         },
-        logonDescription :{
-          fontSize : 17,
+        longDescription :{
+          fontSize : 14,
           textAlign: 'justify',
           paddingVertical:8,
 
@@ -125,13 +125,13 @@ const styles = StyleSheet.create({
         gap: 5,
         justifyContent: 'space-around',
         alignItems : 'center', 
-        marginVertical: 8,
+      //  marginVertical: 8,
       },
       price:{
-              fontWeight : '600',
-              fontSize: 14,
+              fontWeight : '400',
+              fontSize: 10,
               alignSelf: 'center',
-              paddingVertical : 16
+              paddingVertical : 10
       },
       
       tagText: {
@@ -143,22 +143,24 @@ const styles = StyleSheet.create({
           backgroundColor: colors.naranjaBrillante,
           width : 64,
           height : 48,
-          padding:8,
-          borderRadius: 12,
+          padding:6,
+          borderRadius:12,
           alignSelf : 'flex-start'
       },
       discountText: {
           color: colors.blanco,
           position: 'absolute',
-          top:32,
-          textAlign: 'center'
+          top:24,
+          textAlign: 'center',
+          alignItems : 'center', 
+
   
       },
       noStockText: {
           color: 'red'
       },
       price :{
-        fontSize : 32,
+        fontSize : 24,
         fontWeight: '700',
         alignSelf : 'center',
         paddingVertical: 8,

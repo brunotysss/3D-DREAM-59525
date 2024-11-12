@@ -42,7 +42,7 @@ const TabNavigator = () => {
             name = "Receipts" 
             component={ReceipstNavigator}
             options={{
-                tabBarIcon: ({focused})=>(<Icon name="receipt-long" size={32} color = {focused?colors.grisOscuro:colors.grisMedio} />)
+                tabBarIcon: ({focused})=>(<Icon name="receipt" size={32} color = {focused?colors.grisOscuro:colors.grisMedio} />)
             }}
             />
 

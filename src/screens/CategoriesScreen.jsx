@@ -1,17 +1,30 @@
 import { StyleSheet, Text, View , FlatList , Image, Pressable} from 'react-native'
-import categories from "../data/categories.json"
+//import categories from "../data/categories.json"
 import FlatCard from '../components/FlatCard'
-
-
+import { useSelector , useDispatch } from 'react-redux'
+import { colors } from '../global/colors'
+import   { setCategory } from '../feactures/shop/shopSlice'
 
 const CategoriesScreen = ({navigation}) => {
+
+
+
+const categories = useSelector(state => state.shopReducer.value.categories)
+
+const dispatch = useDispatch()
 
 const renderCategoryItem = ({item, index}) =>{
   console.log(item.title);  // Verifica si item.title tiene el valor esperado
 
   return (
 /*<Pressable onPress={()=>setCategory(item.title)}>*/
-<Pressable onPress={() => navigation.navigate('Productos',item.title )}>
+<Pressable onPress={() =>{ 
+dispatch(setCategory(item.title))//esto saca el  navigation.navigate('Productos', item.tittle) ya que esta en todo el estado global x el dispatch ees global
+
+navigation.navigate('Productos')
+
+
+}}>
 <FlatCard style={
         //uso de operador ternario condicion? si es verdadero : si falso
         index%2==0 
