@@ -40,10 +40,8 @@ export default function App() {
 
   return (
     <>
-   
-   <TabNavigator/>
+<TabNavigator/>
       <StatusBar style='auto'/>
-
     </>
   )
 
