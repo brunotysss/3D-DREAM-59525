@@ -1,5 +1,5 @@
 
-import { StyleSheet, Image, View ,FlatList ,Text, Pressable} from 'react-native'
+import { StyleSheet, Image, View ,FlatList ,Text, Pressable , ActivityIndicator} from 'react-native'
 import products from '../data/products.json'
 import FlatCard from '../components/FlatCard'
 import StarsRating  from '../components/StarsRating'
@@ -8,7 +8,14 @@ import { colors } from '../global/colors'
 import { useEffect , useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Search from '../components/Search';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useGetProductsByCategoryQuery } from '../services/shopServices';
+import { setProductId } from '../feactures/shop/shopSlice';
+
+
+
+
+
 //const ProductScreen = ({category , setCategory , setProductId}) => {
     const ProductScreen = ({navigation,route}) => {
     const [productsFiltered, setProductsFiltered] = useState([])
@@ -17,7 +24,18 @@ import { useSelector } from 'react-redux';
     //const  category  = route.params // Agrega un valor por defecto para evitar errores si no hay params
         //const category = useSelector(state=> state.shopReducer.value.categorySelected)
 
-    const productsFilteredByCategory = useSelector(state=>state.shopReducer.value.productsFilteredByCategory)
+  //  const productsFilteredByCategory = useSelector(state=>state.shopReducer.value.productsFilteredByCategory)
+
+const category = useSelector(state=>state.shopReducer.value.categorySelected)
+console.log("category", category)
+
+
+
+    const { data :productsFilteredByCategory , error, isLoading } = useGetProductsByCategoryQuery(category)
+    dispatch = useDispatch()
+
+
+
 
 /*
     useEffect(() =>{    
@@ -33,7 +51,10 @@ import { useSelector } from 'react-redux';
         const renderProductItem = ({item})=>{
             const [promedioRating, totalResenas] = useProductRating(item.id); // Obtenemos el promedio de rating y cantidad de reseñas
             return(
-            <Pressable onPress={() => navigation.navigate('Producto',   item.id )}>
+                <Pressable onPress={() => {
+                    dispatch(setProductId(item.id))
+                    navigation.navigate("Producto")
+                    }}>
                 <FlatCard style={styles.productContainer}>
                     <View>
                         <Image
@@ -80,14 +101,27 @@ import { useSelector } from 'react-redux';
 
   return (
     <>
-                            <Pressable onPress={() => navigation.goBack()}><Icon style={styles.goBack} name="arrow-back-ios" size={24} /></Pressable>
+      {
+          isLoading 
+          ?
+          <ActivityIndicator size="large" color ={colors.verdeNeon} /> 
+          : 
+          error 
+          ?
+        <Text>Error al cargar las categorias</Text>
+        :
+        <>
+                      <Pressable onPress={() => navigation.goBack()}><Icon style={styles.goBack} name="arrow-back-ios" size={24} /></Pressable>
                             <FlatList
    data={productsFilteredByCategory}
    keyExtractor={item=> item.id}
    renderItem={renderProductItem}
    
    />
-   </>
+     </>
+
+      }
+         </>
   )
 }
 

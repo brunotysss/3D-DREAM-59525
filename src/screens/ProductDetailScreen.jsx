@@ -1,15 +1,23 @@
-import { StyleSheet, Text, View , Pressable , Image , useWindowDimensions , FlatList} from 'react-native'
+import { StyleSheet, Text, View , Pressable , Image , useWindowDimensions , FlatList , ActivityIndicator} from 'react-native'
 import { colors } from '../global/colors'
 import  Icon  from 'react-native-vector-icons/MaterialIcons'
-import products from '../data/products.json'
+//import products from '../data/products.json'
 import { useEffect, useState } from 'react'
 import StarsRating  from '../components/StarsRating'
 import useProductRating from '../hooks/useProductRating'; // Importamos el hook para calcular el rating
+import { useDispatch , useSelector } from 'react-redux'
+import { addItem } from '../feactures/cart/cartSilce'
+import { useGetProductQuery } from '../services/shopServices'
+
+
+
+
 
 const ProductDetailScreen = ({ route, navigation }) => {
-  const productId = route.params; // Destructura el productId desde el objeto params
+  //const productId = route.params; // Destructura el productId desde el objeto params
+  const productId = useSelector(state=>state.shopReducer.value.productId)
   console.log(productId)
-  const [productFound, setProductFound] = useState({});
+  //const [productFound, setProductFound] = useState({});
 
  const {width, height}  = useWindowDimensions()
 
@@ -19,16 +27,31 @@ const ProductDetailScreen = ({ route, navigation }) => {
 
       setProductFound(products.find(product=>product.id === productId))
     }, [productId] )*/
-    useEffect(() => {
+    /*useEffect(() => {
       const product = products.find(product => product.id === productId);
     //  console.log("Producto encontrado:", product); // Verifica el resultado de la búsqueda
       setProductFound(product || {}); // Usa un objeto vacío en caso de que no se encuentre el producto
     }, [productId]);
+*/
+
+const { data : productFound, error, isLoading } = useGetProductQuery(productId)
+
+    const dispatch = useDispatch()
 
     const [promedioRating, totalResenas] = useProductRating(productId); // Obtenemos el promedio de rating y cantidad de reseñas
 
   return (
-    
+    <>
+    {
+     isLoading 
+          ?
+          <ActivityIndicator size="large" color ={colors.verdeNeon} /> 
+          : 
+          error 
+          ?
+        <Text>Error al cargar las categorias</Text>
+        :
+
     <View style={styles.productContainer}>
                             <Pressable onPress={() => navigation.goBack()}><Icon style={styles.goBack} name="arrow-back-ios" size={24} /></Pressable>
                             <Text style={styles.textBrand}>{productFound.brand}</Text>
@@ -79,7 +102,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
                         <Text style={styles.price}>Precio: ${productFound.price}</Text>
                         <Pressable 
                             style={ ({pressed}) =>  [{opacity : pressed ? 0.95 : 1}, styles.addToCartButton]}
-                        >
+                         onPress={()=> dispatch(addItem({...productFound,quantity:1}))}>
                             <Text
                               style={styles.textAddCToCart}
                             > Agregar al Carrito</Text>
@@ -89,7 +112,10 @@ const ProductDetailScreen = ({ route, navigation }) => {
              
                
     </View>
+    }
+    </>
   )
+  
 }
 
 export default ProductDetailScreen

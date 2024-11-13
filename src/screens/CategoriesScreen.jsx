@@ -1,20 +1,22 @@
-import { StyleSheet, Text, View , FlatList , Image, Pressable} from 'react-native'
+import { StyleSheet, Text, View , FlatList , Image, Pressable , useWindowDimensions , ActivityIndicator} from 'react-native'
 //import categories from "../data/categories.json"
 import FlatCard from '../components/FlatCard'
 import { useSelector , useDispatch } from 'react-redux'
 import { colors } from '../global/colors'
 import   { setCategory } from '../feactures/shop/shopSlice'
+import { useGetCategoriesQuery } from '../services/shopServices'
 
 const CategoriesScreen = ({navigation}) => {
 
 
 
-const categories = useSelector(state => state.shopReducer.value.categories)
+//const categories = useSelector(state => state.shopReducer.value.categories)
+const { data : categories, error, isLoading } = useGetCategoriesQuery()
 
 const dispatch = useDispatch()
 
 const renderCategoryItem = ({item, index}) =>{
-  console.log(item.title);  // Verifica si item.title tiene el valor esperado
+  //console.log(item.title);  // Verifica si item.title tiene el valor esperado
 
   return (
 /*<Pressable onPress={()=>setCategory(item.title)}>*/
@@ -46,15 +48,28 @@ navigation.navigate('Productos')
 } 
 
   return (
+    <>
     <View style ={styles.categoriesContainer}>
+        {
+          isLoading 
+          ?
+          <ActivityIndicator size="large" color ={colors.verdeNeon} /> 
+          : 
+          error 
+          ?
+        <Text>Error al cargar las categorias</Text>
+        :
         <FlatList
-            data={categories}
-            keyExtractor={item=>item.id}
-            renderItem={renderCategoryItem}
-        
-        />
+        data={categories}
+        keyExtractor={item=>item.id}
+        renderItem={renderCategoryItem}
+    
+    />
+        }
+      
 
     </View>
+    </>
   )
 }
 

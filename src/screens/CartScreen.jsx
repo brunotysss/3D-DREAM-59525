@@ -1,15 +1,15 @@
 import { Pressable,FlatList,StyleSheet, Text, View , Image } from 'react-native'
 import React from 'react'
-import cart from  '../data/cart.json'
+//import cart from  '../data/cart.json'
 import FlatCard from '../components/FlatCard'
 import { colors } from '../global/colors'
 import  Icon  from 'react-native-vector-icons/MaterialIcons'
 import { useState,useEffect } from 'react'
-
+import { useSelector } from 'react-redux'
 
 
 const CartScreen = () => {
-  const [total, setTotal] = useState(0)
+ // const [total, setTotal] = useState(0)
  
  
  /* useEffect(()=>{
@@ -19,6 +19,8 @@ const CartScreen = () => {
   
 },[cart])
 */
+
+/*
 useEffect(()=>{
 setTotal(cart.reduce((acumulador,item)=>
 acumulador+=item.price*item.quantity,
@@ -26,7 +28,11 @@ acumulador+=item.price*item.quantity,
 ))
 
 }, [cart])
+*/
 
+const cart = useSelector(state=>state.cartReducer.value.cartItems)
+
+const total = useSelector(state=>state.cartReducer.value.total)
 
 
   const FooterComponent = () => (
@@ -62,7 +68,7 @@ const renderCartItem = ({item})=>(
       <Text style={styles.description}>{item.shortDescription}</Text>
       <Text style={styles.price}>Precio unitario: $ {item.price}</Text>
       <Text stlyle={styles.quantity}>Cantidad: {item.quantity}</Text>
-      <Text style={styles.total}>Total: $ {}</Text>
+      <Text style={styles.total}>Total: ${item.quantity * item.price}</Text>
       <Icon name="delete" size={24} color="#FC7A5E" style={styles.trashIcon} />
   </View>
 </FlatCard>
