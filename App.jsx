@@ -5,7 +5,9 @@ import { StatusBar } from 'expo-status-bar';
 
 import Header from './src/components/Header';
 import { useEffect  , useState } from 'react';
-import TabNavigator from './src/navigation/TabNavigator';
+//import TabNavigator from './src/navigation/TabNavigator';
+import MainNavigator from './src/navigation/MainNavigation';
+
 import { store } from './src/app/store';
 
 import { Provider} from 'react-redux'
@@ -43,7 +45,7 @@ export default function App() {
   return (
     <Provider store = {store}>
    
-   <TabNavigator/>
+   <MainNavigator/>
       <StatusBar style='auto'/>
 
     </Provider>

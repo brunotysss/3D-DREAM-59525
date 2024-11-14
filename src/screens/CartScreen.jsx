@@ -5,10 +5,11 @@ import FlatCard from '../components/FlatCard'
 import { colors } from '../global/colors'
 import  Icon  from 'react-native-vector-icons/MaterialIcons'
 import { useState,useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { usePostReceiptMutation } from '../services/receiptsService'
+import { clearCart } from '../feactures/cart/cartSilce'
 
-
-const CartScreen = () => {
+const CartScreen = ({navigation}) => {
  // const [total, setTotal] = useState(0)
  
  
@@ -30,6 +31,13 @@ acumulador+=item.price*item.quantity,
 }, [cart])
 */
 
+const dispatch = useDispatch()
+const [triggerPost,result]= usePostReceiptMutation()
+
+
+
+const cartLength = useSelector(state=>state.cartReducer.value.cartLenght)
+
 const cart = useSelector(state=>state.cartReducer.value.cartItems)
 
 const total = useSelector(state=>state.cartReducer.value.total)
@@ -39,10 +47,10 @@ const total = useSelector(state=>state.cartReducer.value.total)
     <View style={styles.footerContainer}>
         <Text style={styles.footerTotal}>Total: ${total}  </Text>
         <Pressable style={styles.confirmButton} onPress={()=>{
-            triggerPost({cart,total,createdAt: Date.now()})
-            dispatch(clearCart())
-            navigation.navigate("Receipts")
-        }} >
+                triggerPost({cart,total,createdAt: Date.now()})
+                dispatch(clearCart())
+                navigation.navigate("Receipts")
+            }} >
             <Text style={styles.confirmButtonText}>Confirmar</Text>
         </Pressable>
     </View>
@@ -77,13 +85,21 @@ const renderCartItem = ({item})=>(
 
 
   return (
-   <FlatList
-   data= {cart}
-   keyExtractor={item => item.id}
-   renderItem={renderCartItem}
-   ListHeaderComponent={<Text style={styles.cartSreenTitle}>Tu carrito:</Text>}
-   ListFooterComponent={<FooterComponent/>}   
-   />
+    <>
+    {
+    cartLength>0
+    ?
+    <FlatList
+        data={cart}
+        keyExtractor={item => item.id}
+        renderItem={renderCartItem}
+        ListHeaderComponent={<Text style={styles.cartScreenTitle}>Tu carrito:</Text>}
+        ListFooterComponent={<FooterComponent />}
+    />
+    :
+    <View style={styles.cartEmpty}><Text style={styles.cartEmptyText} >Aún no hay productos en el carrito</Text></View>
+    }
+    </>
   )
 }
 

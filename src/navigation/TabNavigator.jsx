@@ -1,8 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import ShopNavigation from "./ShopNavigation";
 import CartNavigator from "./CartNavigator";
-import ReceipstNavigator from "./ReceiptysNavigation";
+import ReceiptsNavigator from "./ReceiptsNavigation";
 import { StyleSheet, Text, View } from 'react-native'
 import { colors } from "../global/colors";
 import  Icon  from 'react-native-vector-icons/MaterialIcons'
@@ -16,7 +15,7 @@ const Tab = createBottomTabNavigator()
 
 const TabNavigator = () => {
   return (
-        <NavigationContainer>
+   
                 <Tab.Navigator initialRouteName="Shop"
                 screenOptions={{
                     headerShown:false,
@@ -40,7 +39,7 @@ const TabNavigator = () => {
             />
             <Tab.Screen 
             name = "Receipts" 
-            component={ReceipstNavigator}
+            component={ReceiptsNavigator}
             options={{
                 tabBarIcon: ({focused})=>(<Icon name="receipt" size={32} color = {focused?colors.grisOscuro:colors.grisMedio} />)
             }}
@@ -49,7 +48,7 @@ const TabNavigator = () => {
                 </Tab.Navigator>
 
 
-        </NavigationContainer>
+   
   )
 }
 

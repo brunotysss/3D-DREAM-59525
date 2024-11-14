@@ -10,6 +10,7 @@ export const cartSlice = createSlice({
             cartItems:[],
             user:"demo",
             total: null,
+            cartLenght:0,
             updateAt: Date.now().toLocaleString() // unix timestamp
         }
     },
@@ -54,7 +55,7 @@ export const cartSlice = createSlice({
 })
 
 
-export const {addItem,RemoveItem, ClearCart} = cartSlice.actions
+export const {addItem,RemoveItem, clearCart} = cartSlice.actions
 //export const {setCategory,setProductId} = shopSlice.actions
 
 export default cartSlice.reducer;
