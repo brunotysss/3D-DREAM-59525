@@ -5,8 +5,8 @@ import ReceiptsNavigator from "./ReceiptsNavigation";
 import { StyleSheet, Text, View } from 'react-native'
 import { colors } from "../global/colors";
 import  Icon  from 'react-native-vector-icons/MaterialIcons'
-
-
+import ProfileNavigator from "./ProfileNavigator";
+import MyPlacesNavigator from "./MyPlacesNavigation";
 
 
 
@@ -44,7 +44,14 @@ const TabNavigator = () => {
                 tabBarIcon: ({focused})=>(<Icon name="receipt" size={32} color = {focused?colors.grisOscuro:colors.grisMedio} />)
             }}
             />
-
+             <Tab.Screen 
+                name="Profile"
+                component={ProfileNavigator} 
+                options={{
+                    tabBarIcon: ({focused})=>(<Icon name="account-circle" size={32} color={focused?colors.grisOscuro:colors.grisMedio} />)
+                }}
+            />
+          
                 </Tab.Navigator>
 
 

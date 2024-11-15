@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View , Pressable , Image , useWindowDimensions , FlatList , ActivityIndicator} from 'react-native'
+import { StyleSheet, Text, View , Pressable , Image , useWindowDimensions , FlatList , ActivityIndicator , ScrollView} from 'react-native'
 import { colors } from '../global/colors'
 import  Icon  from 'react-native-vector-icons/MaterialIcons'
 //import products from '../data/products.json'
@@ -52,7 +52,7 @@ const { data : productFound, error, isLoading } = useGetProductQuery(productId)
         <Text>Error al cargar las categorias</Text>
         :
 
-    <View style={styles.productContainer}>
+    <ScrollView style={styles.productContainer}>
                             <Pressable onPress={() => navigation.goBack()}><Icon style={styles.goBack} name="arrow-back-ios" size={24} /></Pressable>
                             <Text style={styles.textBrand}>{productFound.brand}</Text>
                             <Text styles={styles.textTitle}>{productFound.title}</Text>
@@ -111,7 +111,7 @@ const { data : productFound, error, isLoading } = useGetProductQuery(productId)
                         </Pressable>
              
                
-    </View>
+    </ScrollView>
     }
     </>
   )

@@ -65,7 +65,7 @@ const LoginScreen = ({navigation}) => {
                             ...styles.underLineText
                         }
                     }>
-                        Crea una
+                        Crea una cuenta 
                     </Text>
                 </Pressable>
             </View>
