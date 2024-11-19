@@ -11,6 +11,12 @@ import MainNavigator from './src/navigation/MainNavigation';
 import { store } from './src/app/store';
 
 import { Provider} from 'react-redux'
+import { createSessionsTable } from './src/db';
+
+createSessionsTable()
+  .then((result)=>console.log("Tabla creada o inicializada con éxito: ", result))
+  .catch((error)=>console.log("Error al crear la tabla Sessions: ", error))
+
 
 SplashScreen.preventAutoHideAsync();
 

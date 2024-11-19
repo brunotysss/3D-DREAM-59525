@@ -5,6 +5,12 @@ import { useState, useEffect } from 'react';
 import { setUser } from '../feactures/auth/authSilce';
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../services/AuthService';
+import  Icon from 'react-native-vector-icons/MaterialIcons';
+import { insertSession, clearSessions } from '../db/index';
+
+
+
+
 
 const textInputWidth = Dimensions.get('window').width * 0.7
 
@@ -12,24 +18,55 @@ const LoginScreen = ({navigation}) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [rememberMe, setRememberMe] = useState(false)
 
     const dispatch = useDispatch()
 
     const [triggerLogin, result] = useLoginMutation()
 
-    useEffect(()=>{
+  /*  useEffect(()=>{
         if(result.status==="rejected"){
             console.log("Error al iniciar sesión", result)
         }else if(result.status==="fulfilled"){
             console.log("Usuario logueado con éxito")
             dispatch(setUser(result.data))
         }
-    },[result])
+    },[result])*/
+
+    useEffect(() => {
+        //result?.isSuccess
+        //console.log("Remember me: ", rememberMe)
+        if (result.isSuccess) {
+          console.log("Usuario logueado con éxito")
+          console.log(result.data)
+          dispatch(setUser(result.data))
+          
+          if (rememberMe) {
+            clearSessions().then(() => console.log("sesiones eliminadas")).catch(error => console.log("Error al eliminar las sesiones: ", error))
+            console.log("result data:", result.data)
+            insertSession({
+              localId: result.data.localId,
+              email: result.data.email,
+              token: result.data.idToken
+            })
+              .then(res => console.log("Usuario insertado con éxito",res))
+              .catch(error => console.log("Error al insertar usuario",error))
+          }
+    
+        }
+      }, [result,rememberMe])
+
 
     const onsubmit = ()=>{
         //console.log(email,password)       
         triggerLogin({email,password})
     }
+
+
+
+
+
+
 
     return (
         <LinearGradient
@@ -38,7 +75,7 @@ const LoginScreen = ({navigation}) => {
             end={{ x: 1, y: 1 }}   // esquina inferior derecha
             style={styles.gradient}
         >
-            <Text style={styles.title}>Mundo Geek</Text>
+            <Text style={styles.title}>3D Dream</Text>
             <Text style={styles.subTitle}>Ingresa</Text>
             <View style={styles.inputContainer}>
                 <TextInput
@@ -55,6 +92,16 @@ const LoginScreen = ({navigation}) => {
                     secureTextEntry
                 />
 
+            </View>
+            <View style={styles.rememberMeContainer}>
+                <Text style={styles.whiteText}>Mantener sesión iniciada</Text>
+                {
+                    rememberMe
+                    ?
+                    <Pressable onPress={() => setRememberMe(!rememberMe)}><Icon name="toggle-on" size={48} color={colors.verdeNeon} /></Pressable>
+                    :
+                    <Pressable onPress={() => setRememberMe(!rememberMe)}><Icon name="toggle-off" size={48} color={colors.grisClaro} /></Pressable>
+                }
             </View>
             <View style={styles.footTextContainer}>
                 <Text style={styles.whiteText}>¿No tienes una cuenta?</Text>
@@ -92,7 +139,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: colors.verdeNeon,
-        fontFamily: "PressStart2P",
+        fontFamily: "Montserrat",
         fontSize: 24
     },
     subTitle: {
@@ -146,5 +193,12 @@ const styles = StyleSheet.create({
     guestOptionContainer: {
         alignItems: 'center',
         marginTop: 64
-    }
+    },
+    rememberMeContainer: {
+        flexDirection: "row",
+        gap: 5,
+        justifyContent: "space-around",
+        alignItems: "center",
+        marginVertical: 8,
+      }
 })
