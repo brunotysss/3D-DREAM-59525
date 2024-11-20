@@ -6,7 +6,7 @@ import  Icon  from 'react-native-vector-icons/MaterialIcons'
 import Toast from 'react-native-toast-message';
 import FlatCard from '../../components/FlatCard';
 import MapView, {Marker} from 'react-native-maps';
-import { geocoding_api_key } from '../../firebase/database';
+//import { geocoding_api_key } from '../../firebase/database';
 
 const MyPlacesScreen = () => {
 
@@ -67,7 +67,7 @@ const MyPlacesScreen = () => {
                   `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=${process.env.EXPO_PUBLIC_GEOCODING_API_KEY}`
               );
               const data = await response.json()
-              console.log(data)
+              //console.log(data)
               if (data.status === 'OK') {
                   const formattedAddress = data.results[0].formatted_address;
                   setAddress(formattedAddress)
@@ -83,7 +83,6 @@ const MyPlacesScreen = () => {
           setLocation(location.coords);
       }
   }
-
 
   const savePlace = () => {
     if(location && title){

@@ -1,6 +1,5 @@
 
 import { StyleSheet, Image, View ,FlatList ,Text, Pressable , ActivityIndicator} from 'react-native'
-import products from '../data/products.json'
 import FlatCard from '../components/FlatCard'
 import StarsRating  from '../components/StarsRating'
 import useProductRating from '../hooks/useProductRating'; // Importamos el hook para calcular el rating
@@ -27,14 +26,32 @@ import { setProductId } from '../feactures/shop/shopSlice';
   //  const productsFilteredByCategory = useSelector(state=>state.shopReducer.value.productsFilteredByCategory)
 
 const category = useSelector(state=>state.shopReducer.value.categorySelected)
-console.log("category", category)
+
 
 
 
     const { data :productsFilteredByCategory , error, isLoading } = useGetProductsByCategoryQuery(category)
     dispatch = useDispatch()
 
-
+    /*useEffect(() => {
+        setProductsFiltered(productsFilteredByCategory)
+        if (search) {
+            setProductsFiltered(productsFilteredByCategory.filter(product => product.title.toLowerCase().includes(search.toLowerCase())))
+        }
+    }, [search,productsFilteredByCategory])*/
+    useEffect(() => {
+        console.log("Productos sin filtrar:", productsFilteredByCategory);
+        console.log("Valor del search:", search);
+        if (productsFilteredByCategory) {
+            const filtered = search
+                ? productsFilteredByCategory.filter(product =>
+                    product.title.toLowerCase().includes(search.toLowerCase())
+                )
+                : productsFilteredByCategory;
+            console.log("Productos filtrados:", filtered);
+            setProductsFiltered(filtered);
+        }
+    }, [search, productsFilteredByCategory]);
 
 
 /*
@@ -112,8 +129,9 @@ console.log("category", category)
         :
         <>
                       <Pressable onPress={() => navigation.goBack()}><Icon style={styles.goBack} name="arrow-back-ios" size={24} /></Pressable>
+                      <Search setSearch={setSearch} />
                             <FlatList
-   data={productsFilteredByCategory}
+   data={productsFiltered}
    keyExtractor={item=> item.id}
    renderItem={renderProductItem}
    
