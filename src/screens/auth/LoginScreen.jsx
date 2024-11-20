@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, TextInput, Pressable, Dimensions } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
-import { colors } from '../global/colors'
+import { colors } from '../../global/colors'
 import { useState, useEffect } from 'react';
-import { setUser } from '../feactures/auth/authSilce';
+import { setUser } from '../../feactures/auth/authSilce';
 import { useDispatch } from 'react-redux';
-import { useLoginMutation } from '../services/AuthService';
+import { useLoginMutation } from '../../services/AuthService';
 import  Icon from 'react-native-vector-icons/MaterialIcons';
-import { insertSession, clearSessions } from '../db/index';
+import { insertSession, clearSessions } from '../../db/index';
 
 
 

@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import SignupScreen from "../screens/SignupScreen"
-import LoginScreen from "../screens/LoginScreen"
+import SignupScreen from "../screens/auth/SignupScreen"
+import LoginScreen from "../screens/auth/LoginScreen"
 
 const Stack = createNativeStackNavigator()
 const AuthNavigation = () => {

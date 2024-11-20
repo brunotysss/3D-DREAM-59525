@@ -3,15 +3,11 @@ import { colors } from '../global/colors'
 
 const Search = ({setSearch}) => {
   return (
-     <TextInput
-     placeholder='Busca un producto'
-     onChangeText={(text)=>setSearch(text)}
-     style={styles.searchInput}
-     
-     
-     >
-
-     </TextInput>
+   <TextInput 
+   placeholder="Busca un producto"
+   onChangeText={(text)=>setSearch(text)}
+   style={styles.searchInput}
+ />
 
   )
 }
