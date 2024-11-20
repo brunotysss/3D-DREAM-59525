@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: colors.verdeNeon,
-        fontFamily: "PressStart2P",
+        fontFamily: "Montserrat",
         fontSize: 24
     },
     subTitle: {
