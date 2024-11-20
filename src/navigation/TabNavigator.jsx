@@ -53,6 +53,14 @@ const TabNavigator = () => {
                     tabBarIcon: ({focused})=>(<Icon name="account-circle" size={32} color={focused?colors.grisOscuro:colors.grisMedio} />)
                 }}
             />
+            <Tab.Screen 
+                name="Places"
+                component={MyPlacesNavigator} 
+                options={{
+                    tabBarIcon: ({focused})=>(<Icon name="location-on" size={32} color={focused?colors.grisOscuro:colors.grisMedio} />)
+                }}
+            />
+          
           
                 </Tab.Navigator>
 
