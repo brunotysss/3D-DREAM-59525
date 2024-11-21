@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //import ProductScreen from '../screens/ProductScreen';
 import Header from "../components/Header";
-import { CategoriesScreen, ProductScreen, ProductDetailScreen } from "../screens/index";
+import { CategoriesScreen, ProductScreen, ProductDetailScreen , ReviewScreen } from "../screens/index";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +17,7 @@ const ShopNavigation = () => {
         <Stack.Screen name="Categorias" component={CategoriesScreen} />
         <Stack.Screen name="Productos" component={ProductScreen} />
         <Stack.Screen name="Producto" component={ProductDetailScreen} />
+        <Stack.Screen name="Review" component={ReviewScreen} />
       </Stack.Navigator>
 
   );
