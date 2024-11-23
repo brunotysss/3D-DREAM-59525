@@ -40,11 +40,10 @@ export const cartSlice = createSlice({
         }
 
     },
-    removeItem: (state,action)=>{
-        state.value.cartItems = state.value.cartItems.filter(item=item.id!==action.payload)
-        state.value.total = calculate_total_price(state.value.cartItems)
-        state.value.cartLenght -= 1
-
+    removeItem: (state, action) => {
+        state.value.cartItems = state.value.cartItems.filter(item => item.id !== action.payload); // Corrección del filtro
+        state.value.total = calculate_total_price(state.value.cartItems);
+        state.value.cartLenght = state.value.cartItems.length;
     },
     clearCart: (state) => {
         state.value.cartItems=[]
@@ -55,7 +54,7 @@ export const cartSlice = createSlice({
 })
 
 
-export const {addItem,RemoveItem, clearCart} = cartSlice.actions
+export const {addItem,removeItem, clearCart} = cartSlice.actions
 //export const {setCategory,setProductId} = shopSlice.actions
 
 export default cartSlice.reducer;
