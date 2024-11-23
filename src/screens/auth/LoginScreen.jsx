@@ -70,11 +70,11 @@ const LoginScreen = ({navigation}) => {
 
     return (
         <LinearGradient
-            colors={['#400962', '#11001B']}
-            start={{ x: 0, y: 0 }} // esquina superior izquierda
-            end={{ x: 1, y: 1 }}   // esquina inferior derecha
-            style={styles.gradient}
-        >
+        colors={['#FF9800', '#4CAF50', '#11001B']} // Degradado de naranja vibrante, verde y un fondo oscuro
+        start={{ x: 0, y: 0 }} // Esquina superior izquierda
+        end={{ x: 1, y: 1 }}   // Esquina inferior derecha
+        style={styles.gradient}
+    >
             <Text style={styles.title}>3D Dream</Text>
             <Text style={styles.subTitle}>Ingresa</Text>
             <View style={styles.inputContainer}>
@@ -138,16 +138,20 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        color: colors.verdeNeon,
+        color: colors.blanco, // Cambiado a blanco para mejor visibilidad
         fontFamily: "Montserrat",
-        fontSize: 24
+        fontSize: 36, // Incrementado para mayor prominencia
+        fontWeight: "bold", // Resalta el título
+        textAlign: "center", // Alineación al centro
+        marginBottom: 8,
     },
     subTitle: {
         fontFamily: "Montserrat",
-        fontSize: 18,
-        color: colors.amarillo,
+        fontSize: 20, // Ligero incremento para acompañar el título
+        color: colors.amarillo, // Amarillo dorado para contraste
         fontWeight: '700',
-        letterSpacing: 3
+        letterSpacing: 3,
+        textAlign: "center", // Alineación al centro
     },
     inputContainer: {
         gap: 16,

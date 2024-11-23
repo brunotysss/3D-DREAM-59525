@@ -72,12 +72,12 @@ const SignupScreen = ({navigation}) => {
 
     return (
         <LinearGradient
-        colors={['#400962', '#11001B']}
-        start={{ x: 0, y: 0 }} // esquina superior izquierda
-        end={{ x: 1, y: 1 }}   // esquina inferior derecha
+        colors={['#FF9800', '#4CAF50', '#11001B']} // Degradado de naranja vibrante, verde y un fondo oscuro
+        start={{ x: 0, y: 0 }} // Esquina superior izquierda
+        end={{ x: 1, y: 1 }}   // Esquina inferior derecha
         style={styles.gradient}
     >
-        <Text style={styles.title}>Mundo Geek</Text>
+        <Text style={styles.title}>3D DREAM</Text>
         <Text style={styles.subTitle}>Registrate</Text>
         <View style={styles.inputContainer}>
             <TextInput
@@ -136,63 +136,77 @@ const styles = StyleSheet.create({
     gradient: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     title: {
-        color: colors.verdeNeon,
+        color: colors.blanco, // Cambiado a blanco para mejor visibilidad
         fontFamily: "Montserrat",
-        fontSize: 24
+        fontSize: 36, // Incrementado para mayor prominencia
+        fontWeight: "bold", // Resalta el título
+        textAlign: "center", // Alineación al centro
+        marginBottom: 8,
     },
     subTitle: {
         fontFamily: "Montserrat",
         fontSize: 18,
         color: colors.amarillo,
         fontWeight: '700',
-        letterSpacing: 3
+        letterSpacing: 2,
+        textAlign: "center",
     },
     inputContainer: {
         gap: 16,
         margin: 16,
         marginTop: 48,
         alignItems: 'center',
-
     },
     textInput: {
-        padding: 8,
+        padding: 10,
         paddingLeft: 16,
         borderRadius: 16,
-        backgroundColor: "#95859E",
+        backgroundColor: colors.grisOscuro, // Más oscuro para resaltar
         width: textInputWidth,
         color: colors.blanco,
+        fontSize: 16,
+    },
+    error: {
+        color: colors.morado, // Rojo-naranja cálido para errores
+        fontSize: 14,
+        fontWeight: "600",
+        marginTop: -10,
+        marginBottom: 10,
     },
     footTextContainer: {
         flexDirection: 'row',
         gap: 8,
+        marginTop: 16,
     },
     whiteText: {
-        color: colors.blanco
+        color: colors.blanco,
+        fontSize: 14,
     },
     underLineText: {
         textDecorationLine: 'underline',
+        fontWeight: '600',
     },
     strongText: {
         fontWeight: '900',
-        fontSize: 16
+        fontSize: 16,
     },
     btn: {
         padding: 16,
         paddingHorizontal: 32,
-        backgroundColor: colors.morado,
+        backgroundColor: colors.naranjaBrillante, // Cambiado para destacar
         borderRadius: 16,
-        marginTop: 32
+        marginTop: 32,
     },
     btnText: {
         color: colors.blanco,
         fontSize: 16,
-        fontWeight: '700'
+        fontWeight: '700',
     },
     guestOptionContainer: {
         alignItems: 'center',
-        marginTop: 64
-    }
-})
+        marginTop: 48,
+    },
+});

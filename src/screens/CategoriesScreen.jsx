@@ -74,29 +74,39 @@ navigation.navigate('Productos')
 }
 
 export default CategoriesScreen
-
 const styles = StyleSheet.create({
-    categoryItemContainer:{
-            padding: 20,
-            justifyContent : "space-between",
-            alignItems : "center",
-            marginHorizontal : 10,
-            marginVertical : 5,
-        },
-        categoryTitle:{
-                fontSize : 24,
-                fontWeight :"bold",
-        },
-        image:{
-            width:150,
-            height:80,
-        },
-        row:{
-            flexDirection: 'row',
-        },
-        rowReverse:{
-            flexDirection: 'row-reverse',
-        }
-
-
-})
+  categoryItemContainer: {
+      flexDirection: "row", // Imagen y texto en fila
+      padding: 20,
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginHorizontal: 10,
+      marginVertical: 5,
+      borderRadius: 8,
+      backgroundColor: colors.grisOscuro, // Mantiene el fondo oscuro de las tarjetas
+      shadowColor: colors.negro,
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 2,
+  },
+  categoryTitle: {
+      fontSize: 16, // Tamaño ajustado para no desbordar
+      fontWeight: "bold",
+      color: colors.negro, // Cambiado a negro para mantener consistencia
+      flexShrink: 1, // Evita desbordamientos
+      numberOfLines: 1, // Limita a una línea
+      ellipsizeMode: "tail", // Trunca con "..." si es necesario
+      textAlign: "center", // Centrado
+  },
+  image: {
+      width: 100, // Tamaño ajustado
+      height: 60,
+      marginRight: 10,
+  },
+  row: {
+      flexDirection: "row",
+  },
+  rowReverse: {
+      flexDirection: "row-reverse",
+  },
+});

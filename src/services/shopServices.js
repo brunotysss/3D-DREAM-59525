@@ -13,13 +13,14 @@ export const shopApi = createApi({
             }),
             getProductsByCategory:builder.query({
                 query: (category) => {
-                    category = category.toLowerCase()
+               //     category = category.toLowerCase()
                     return (
                         `products.json?orderBy="category"&equalTo="${category}"` //Strings literal
             )},
-            transformResponse: (response) =>(
-                response ? Object.values(response) : [] 
-            )
+            transformResponse: (response) => {
+                console.log("Respuesta cruda de Firebase:", response);
+                return response ? Object.values(response) : [];
+            }
             }),
             getProduct: builder.query({
                 query: (productId) => `products.json?orderBy="id"&equalTo=${productId}`,
