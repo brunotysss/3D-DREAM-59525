@@ -13,7 +13,7 @@ export const shopApi = createApi({
             }),
             getProductsByCategory:builder.query({
                 query: (category) => {
-                    category = category.toLowerCase()
+                 //   category = category.toLowerCase()
                     return (
                         `products.json?orderBy="category"&equalTo="${category}"` //Strings literal
             )},
