@@ -4,10 +4,26 @@ import { FlatList, Text, StyleSheet, View, Pressable } from "react-native";
 import FlatCard from "../components/FlatCard";
 import { colors } from "../global/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback } from "react";
 
 const ReceiptsScreen = ({ navigation }) => {
     const user = useSelector(state => state.authReducer.value);
-    const { data: receipts = [], error, isLoading } = useGetReceiptsQuery(user.localId);
+
+    // Fetch receipts data
+    const {
+        data: receipts = [],
+        error,
+        isLoading,
+        refetch
+    } = useGetReceiptsQuery(user.localId);
+
+    // Refetch receipts whenever the screen is focused
+    useFocusEffect(
+        useCallback(() => {
+            refetch(); // This ensures the receipts list updates when returning to this screen
+        }, [refetch])
+    );
 
     const renderReceiptItem = ({ item }) => (
         <Pressable

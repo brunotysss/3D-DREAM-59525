@@ -11,7 +11,7 @@ const ReceipstNavigator = () => {
       {/* Pantalla de lista de recibos */}
       <Stack.Screen
         component={ReceiptsScreen}
-        name="Receipts"
+        name="ReceiptsHome"
         options={{ title: "Recibos" }}
       />
 
