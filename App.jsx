@@ -29,6 +29,7 @@ export default function App() {
 
     'Montserrat': require('./assets/fonts/Montserrat-Variable.ttf'),
     'Rock3D': require('./assets/fonts/Rock3D-Regular-Static.ttf'),
+    'Goldman': require('./assets/fonts/Goldman-Regular.ttf'),
 
 
   });
