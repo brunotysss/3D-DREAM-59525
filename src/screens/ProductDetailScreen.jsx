@@ -104,16 +104,18 @@ const ProductDetailScreen = ({ route, navigation }) => {
           {productFound.stock <= 0 && (
             <Text style={styles.noStockText}> Sin Stock</Text>
           )}
-          <View>
-            {/* Envolver las estrellas y el texto de reseñas en un Pressable */}
-            <Pressable
-              style={styles.ratingContainer}
-              onPress={() => navigation.navigate("Review", { productId })}
-            >
-              <StarsRating rating={promedioRating} />
-              <Text>({totalResenas} reseñas)</Text>
-            </Pressable>
-          </View>
+      <View style={styles.ratingWrapper}>
+  <Pressable
+    style={styles.pressableRating}
+    onPress={() => navigation.navigate("Review", { productId })}
+  >
+    <StarsRating rating={promedioRating || 0} size={16} interactive={false} />
+    <Text style={styles.ratingText}>
+      ({totalResenas || 0} reseñas)
+    </Text>
+  </Pressable>
+</View>
+
 
           <Text style={styles.price}>Precio: ${productFound.price}</Text>
           <Pressable
@@ -211,5 +213,11 @@ const styles = StyleSheet.create({
     color: colors.blanco,
     fontSize: 24,
     textAlign: "center",
+  },
+  ratingWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8, // Espaciado entre las estrellas y el texto
+    marginVertical: 8,
   },
 });

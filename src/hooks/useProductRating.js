@@ -1,15 +1,19 @@
 import reviews from '../data/reviews.json';
+import {
+    useGetReviewsByProductQuery,
+    usePostReviewMutation,
+    useHasUserPurchasedProductQuery,
+  } from "../services/reviewService";
 
-
-const useProductRating = (productId) =>{
-    const productReviews = reviews.find(review => review.productId === productId);
-        if(!productReviews || productReviews.reviews.length === 0) return [0, 0];
-
-
-        const totalRating = productReviews.reviews.reduce((sum,review) => sum + review.rating , 0 );
-        const ratingPromedio = totalRating / productReviews.reviews.length;
-
-        return [ratingPromedio, totalRating];
-};
-
+const useProductRating = (productId) => {
+    const { data: reviews = [] } = useGetReviewsByProductQuery(productId);
+  
+    const totalReviews = reviews.length;
+    const averageRating =
+      totalReviews > 0
+        ? reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews
+        : 0;
+  
+    return [averageRating.toFixed(1), totalReviews]; // Promedio con 1 decimal y total
+  };
 export default useProductRating;

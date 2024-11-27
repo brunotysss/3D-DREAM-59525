@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePostReceiptMutation } from '../services/receiptsService';
 import { clearCart, removeItem } from '../feactures/cart/cartSilce';
+import { useUpdateUserPurchaseMutation } from "../services/reviewService";
 
 const CartScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const CartScreen = ({ navigation }) => {
     const cart = useSelector((state) => state.cartReducer.value.cartItems);
     const total = useSelector((state) => state.cartReducer.value.total);
     const user = useSelector((state) => state.authReducer.value);
+    const [updateUserPurchase] = useUpdateUserPurchaseMutation();
 
     // Manejar la confirmación del carrito
     const handleConfirm = async () => {
@@ -32,7 +34,10 @@ const CartScreen = ({ navigation }) => {
         try {
             const result = await triggerPost(receipt).unwrap();
             console.log("Recibo creado exitosamente:", result);
-
+  // Actualizar el estado de las compras del usuario
+  for (const item of cart) {
+    await updateUserPurchase({ userId: user.localId, productId: item.id });
+  }
             // Limpia el carrito
             dispatch(clearCart());
 
