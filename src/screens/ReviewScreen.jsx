@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,39 +6,111 @@ import {
   FlatList,
   TextInput,
   Pressable,
+  TouchableOpacity,
 } from "react-native";
 import {
   useGetReviewsByProductQuery,
   usePostReviewMutation,
+  useHasUserPurchasedProductQuery,
 } from "../services/reviewService";
+import { useSelector } from "react-redux";
+import { colors } from "../global/colors";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
-const ReviewScreen = ({ route }) => {
+const ReviewScreen = ({ route, navigation }) => {
   const { productId } = route.params;
-  const { data: reviews = [], isLoading } = useGetReviewsByProductQuery(productId);
-  const [postReview] = usePostReviewMutation();
-  const [newReview, setNewReview] = useState("");
+  const user = useSelector((state) => state.authReducer.value);
 
+  // Fetch de las reseñas del producto
+  const { data: reviews = [], isLoading } = useGetReviewsByProductQuery(
+    productId
+  );
+
+  // Verifica si el usuario compró el producto
+  const { data: hasPurchased = false, refetch: refetchHasPurchased } =
+    useHasUserPurchasedProductQuery({
+      userId: user.localId,
+      productId,
+    });
+
+  // Mutation para enviar una reseña
+  const [postReview] = usePostReviewMutation();
+
+  const [newReview, setNewReview] = useState("");
+  const [rating, setRating] = useState(0);
+  const [userHasCommented, setUserHasCommented] = useState(false);
+
+  // Calculamos el promedio y el total de reseñas
   const totalReviews = reviews.length;
   const averageRating =
     reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews || 0;
 
+  // Verifica si el usuario ya comentó
+  useEffect(() => {
+    if (reviews.some((review) => review.user === user.email)) {
+      setUserHasCommented(true);
+    } else {
+      setUserHasCommented(false);
+    }
+  }, [reviews, user.email]);
+
+  // Refetch automático cuando se monta la pantalla
+  useEffect(() => {
+    refetchHasPurchased();
+  }, [refetchHasPurchased]);
+
+  // Maneja el envío de la reseña
   const handlePostReview = async () => {
-    if (newReview.trim() !== "") {
+    if (!hasPurchased) {
+      alert("Solo los usuarios que compraron este producto pueden comentar.");
+      return;
+    }
+
+    if (userHasCommented) {
+      alert("Ya has comentado este producto.");
+      return;
+    }
+
+    if (newReview.trim() !== "" && rating > 0) {
       try {
         await postReview({
           productId,
-          review: { user: "Anonymous", comment: newReview, rating: 5 },
+          review: { user: user.email, comment: newReview, rating },
         });
         setNewReview("");
+        setRating(0);
+
+        // Actualizamos las reseñas y verificamos si el usuario puede comentar
+        refetchHasPurchased();
       } catch (error) {
         console.error("Error al enviar la reseña:", error);
       }
+    } else {
+      alert("Por favor, completa tu reseña y selecciona una calificación.");
     }
   };
 
+  // Renderiza las estrellas
+  const renderStars = () => (
+    <View style={styles.starContainer}>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <TouchableOpacity key={star} onPress={() => setRating(star)}>
+          <Icon
+            name="star"
+            size={48}
+            color={star <= rating ? colors.amarillo : colors.grisClaro}
+          />
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+
   return (
     <View style={styles.container}>
-      {/* Encabezado con puntuación promedio */}
+      <Pressable onPress={() => navigation.goBack()}>
+        <Icon style={styles.goBack} name="arrow-back-ios" size={24} />
+      </Pressable>
+
       <View style={styles.header}>
         <Text style={styles.ratingText}>{averageRating.toFixed(1)}</Text>
         <Text style={styles.ratingSubText}>
@@ -46,7 +118,6 @@ const ReviewScreen = ({ route }) => {
         </Text>
       </View>
 
-      {/* Lista de reseñas */}
       {isLoading ? (
         <Text>Cargando reseñas...</Text>
       ) : (
@@ -63,16 +134,32 @@ const ReviewScreen = ({ route }) => {
         />
       )}
 
-      {/* Input para añadir reseña */}
-      <TextInput
-        style={styles.input}
-        placeholder="Escribe tu opinión..."
-        value={newReview}
-        onChangeText={setNewReview}
-      />
-      <Pressable style={styles.button} onPress={handlePostReview}>
-        <Text style={styles.buttonText}>Enviar Opinión</Text>
-      </Pressable>
+      {hasPurchased && !userHasCommented && (
+        <>
+          {renderStars()}
+          <TextInput
+            style={styles.input}
+            placeholder="Escribe tu opinión..."
+            value={newReview}
+            onChangeText={setNewReview}
+          />
+          <Pressable style={styles.button} onPress={handlePostReview}>
+            <Text style={styles.buttonText}>Enviar Opinión</Text>
+          </Pressable>
+        </>
+      )}
+
+      {!hasPurchased && (
+        <Text style={styles.notice}>
+          Solo los usuarios que compraron este producto pueden dejar reseñas.
+        </Text>
+      )}
+
+      {userHasCommented && (
+        <Text style={styles.notice}>
+          Ya has comentado este producto. Gracias por tu opinión.
+        </Text>
+      )}
     </View>
   );
 };
@@ -84,6 +171,17 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#fff",
+  },
+  backButton: {
+    marginBottom: 16,
+    padding: 8,
+    backgroundColor: "#007BFF",
+    borderRadius: 8,
+    alignSelf: "flex-start",
+  },
+  backButtonText: {
+    color: "#fff",
+    fontSize: 16,
   },
   header: {
     alignItems: "center",
@@ -132,5 +230,19 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 18,
+  },
+  goBack: {
+    padding: 8,
+    color: colors.grisMedio,
+  },
+  notice: {
+    marginTop: 16,
+    color: "red",
+    textAlign: "center",
+  },
+  starContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginVertical: 16,
   },
 });
